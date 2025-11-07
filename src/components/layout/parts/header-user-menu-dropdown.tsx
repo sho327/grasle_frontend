@@ -77,8 +77,8 @@ export const HeaderUserMenuDropdown = ({
                         avatar={userIconSrc}
                         level={99}
                         showLevel={true}
-                        isPremium={true}
-                        showPremium={true}
+                        // isPremium={true}
+                        // showPremium={true}
                         size="sm"
                     />
                 </Button>
@@ -91,10 +91,16 @@ export const HeaderUserMenuDropdown = ({
                         <p className="text-sm leading-none font-medium">{displayUserName}</p>
                         <div className="flex items-center space-x-2">
                             <p className="text-muted-foreground text-xs leading-none">Lv. {99}</p>
-                            <Badge className="border-0 bg-gradient-to-r from-yellow-400 to-orange-500 text-[0.625rem] text-white">
-                                プレミアム
+                            <Badge className="border-0 bg-gray-700/10 text-[0.625rem] font-semibold text-gray-700">
+                                無料
                             </Badge>
                         </div>
+                        {/* <div className="flex items-center space-x-2">
+                            <p className="text-muted-foreground text-xs leading-none">Lv. {99}</p>
+                            <Badge className="border-0 bg-gradient-to-r from-yellow-400 to-orange-500 text-[0.625rem] font-semibold text-white">
+                                プレミアム
+                            </Badge>
+                        </div> */}
                     </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />

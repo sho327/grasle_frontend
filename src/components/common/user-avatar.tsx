@@ -77,8 +77,8 @@ export function UserAvatar({
             )}
             {/* レベル表示 */}
             {level && showLevel && (
-                <Badge className="absolute -right-1 -bottom-1 flex min-h-3 min-w-3 items-center justify-center bg-gradient-to-r from-emerald-500 to-green-500 p-0 text-[0.625rem] text-white">
-                    {/* <Badge className="bg-primary absolute -right-1 -bottom-1 flex min-h-3 min-w-3 items-center justify-center p-0 text-[0.625rem] text-white"> */}
+                // <Badge className="absolute -right-1 -bottom-1 flex min-h-3 min-w-3 items-center justify-center bg-gradient-to-r from-emerald-500 to-green-500 p-0 text-[0.625rem] text-white">
+                <Badge className="bg-primary absolute -right-1 -bottom-1 flex min-h-3 min-w-3 items-center justify-center p-0 text-[0.625rem] text-white">
                     {level}
                 </Badge>
             )}

@@ -69,7 +69,7 @@ export function Header({ user, notifications, notificationsUnreadCount }: Header
                     onMarkAllAsRead={onMarkAllAsRead}
                 /> */}
 
-                {/* ユーザメニュー */}
+                {/* User Menu */}
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button
