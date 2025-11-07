@@ -1,0 +1,165 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+    /* Unimoa brand colors - #18BC9C primary, #f4f6f9 background */
+    --background: #f4f6f9;
+    --foreground: #2c3e50;
+    --card: #ffffff;
+    --card-foreground: #2c3e50;
+    --popover: #ffffff;
+    --popover-foreground: #2c3e50;
+    --primary: #18bc9c;
+    --primary-foreground: #ffffff;
+    --secondary: #ecf0f1;
+    --secondary-foreground: #2c3e50;
+    --muted: #bdc3c7;
+    --muted-foreground: #7f8c8d;
+    --accent: #3498db;
+    --accent-foreground: #ffffff;
+    --destructive: #e74c3c;
+    --destructive-foreground: #ffffff;
+    --border: #dfe6e9;
+    --input: #dfe6e9;
+    --ring: #18bc9c;
+    --chart-1: #18bc9c; /* PrimaryColor(primary): ホーム */
+    --chart-2: #3498db; /* InfoColor(accent): タスク */
+    --chart-3: #9b59b6; /* OtherColor:  */
+    --chart-4: #f39c12; /* WarningColor:  */
+    --chart-5: #e74c3c; /* DangerColor(destructive):  */
+    /* Using rounded-sm (0.125rem) as specified */
+    --radius: 0.125rem;
+    --sidebar: #ffffff;
+    --sidebar-foreground: #2c3e50;
+    --sidebar-primary: #18bc9c;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #ecf0f1;
+    --sidebar-accent-foreground: #2c3e50;
+    --sidebar-border: #dfe6e9;
+    --sidebar-ring: #18bc9c;
+}
+
+.dark {
+    --background: #1a1a1a;
+    --foreground: #f4f6f9;
+    --card: #2c2c2c;
+    --card-foreground: #f4f6f9;
+    --popover: #2c2c2c;
+    --popover-foreground: #f4f6f9;
+    --primary: #18bc9c;
+    --primary-foreground: #ffffff;
+    --secondary: #3a3a3a;
+    --secondary-foreground: #f4f6f9;
+    --muted: #4a4a4a;
+    --muted-foreground: #a0a0a0;
+    --accent: #3498db;
+    --accent-foreground: #ffffff;
+    --destructive: #e74c3c;
+    --destructive-foreground: #ffffff;
+    --border: #3a3a3a;
+    --input: #3a3a3a;
+    --ring: #18bc9c;
+    --chart-1: #18bc9c;
+    --chart-2: #3498db;
+    --chart-3: #9b59b6;
+    --chart-4: #f39c12;
+    --chart-5: #e74c3c;
+    --sidebar: #2c2c2c;
+    --sidebar-foreground: #f4f6f9;
+    --sidebar-primary: #18bc9c;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #3a3a3a;
+    --sidebar-accent-foreground: #f4f6f9;
+    --sidebar-border: #3a3a3a;
+    --sidebar-ring: #18bc9c;
+}
+
+@theme inline {
+    /* Updated font to Noto Sans JP */
+    --font-sans: 'Noto Sans JP', 'Noto Sans JP Fallback', sans-serif;
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --radius-sm: var(--radius);
+    --radius-md: calc(var(--radius) * 2);
+    --radius-lg: calc(var(--radius) * 3);
+    --radius-xl: calc(var(--radius) * 4);
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+@keyframes sway {
+    0%,
+    100% {
+        transform: rotate(-8deg);
+    }
+    50% {
+        transform: rotate(8deg);
+    }
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translate(-50%, -100%);
+        opacity: 0;
+    }
+    10% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+    90% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -20px);
+        opacity: 0;
+    }
+}
+
+.animate-sway {
+    animation: sway 1.5s ease-in-out infinite;
+    transform-origin: bottom center;
+}
+
+.animate-slideDown {
+    animation: slideDown 3s ease-in-out forwards;
+}
