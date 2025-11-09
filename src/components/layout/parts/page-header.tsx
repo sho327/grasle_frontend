@@ -26,6 +26,7 @@ export default function PageHeader({
         | 'default'
         | 'home'
         | 'project-list'
+        | 'member-list'
         | 'project-task'
         | 'project-report'
         | 'project-setting'
@@ -72,13 +73,15 @@ export default function PageHeader({
                                           ? ' text-gray-600'
                                           : iconVariant === 'project-list'
                                             ? ' text-chart-2'
-                                            : iconVariant === 'project-task'
+                                            : iconVariant === 'member-list'
                                               ? ' text-chart-3'
-                                              : iconVariant === 'project-report'
+                                              : iconVariant === 'project-task'
                                                 ? ' text-chart-4'
-                                                : iconVariant === 'project-setting'
+                                                : iconVariant === 'project-report'
                                                   ? ' text-chart-5'
-                                                  : ' text-gray-600')
+                                                  : iconVariant === 'project-setting'
+                                                    ? ' text-chart-6'
+                                                    : ' text-gray-600')
                                 }
                             />
                         </div>

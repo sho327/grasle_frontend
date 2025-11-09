@@ -64,16 +64,16 @@ export default function HeaderLayout({ profileWithTeams, selectTeam }: HeaderPro
                     <ChevronLeft className="h-5 w-5" />
                 </Button>
 
-                {isMobile && (
-                    <Link href="/teams" className="flex items-center gap-2.5">
-                        {/* <div className="bg-primary flex h-9 w-9 items-center justify-center rounded-xl shadow-sm">
-                            <Leaf className="text-primary-foreground h-5 w-5" />
-                        </div> */}
-                        <span className="text-foreground text-xl font-bold">
-                            {appInfo.APP_NAME}
-                        </span>
-                    </Link>
-                )}
+                {/* 選択中プロジェクト名 */}
+                {/* *** スマホの場合表示/PCの場合非表示 *** */}
+                <Link href="/teams" className="flex items-center gap-2.5">
+                    {/* <div className="bg-primary flex h-9 w-9 items-center justify-center rounded-xl shadow-sm">
+                        <Leaf className="text-primary-foreground h-5 w-5" />
+                    </div> */}
+                    <span className="text-foreground text-xl font-semibold">
+                        {appInfo.APP_NAME}
+                    </span>
+                </Link>
                 {/* <div className="mx-2 hidden h-4 w-px bg-gray-300 md:block" /> */}
                 {/* チーム選択/ドロップダウン */}
                 {/* <HeaderGroupSelectDropdown

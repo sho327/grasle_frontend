@@ -31,7 +31,7 @@ const navigationItems = [
         // isPremium: true,
     },
     {
-        title: 'プロジェクト一覧',
+        title: 'プロジェクト',
         href: '/project/list',
         icon: FolderOpen,
         badge: '新機能',
@@ -50,7 +50,7 @@ const navigationItems = [
     // },
     {
         title: 'チームメンバー',
-        href: '/members',
+        href: '/member/list',
         icon: Users,
         isPremium: false,
     },
