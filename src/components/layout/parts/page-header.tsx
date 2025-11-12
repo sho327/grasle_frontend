@@ -46,7 +46,7 @@ export default function PageHeader({
     return (
         <>
             {/* ページアイコン/タイトル/詳細 */}
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between">
                 <div className="flex items-center gap-2.5 sm:gap-3">
                     {/* 戻るボタン */}
                     {isBackButton && (
