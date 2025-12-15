@@ -98,7 +98,7 @@ export default function Sidebar({ profileWithTeams, selectTeam }: SidebarProps) 
     return (
         <UISidebar className="border-r border-gray-200">
             <SidebarHeader className="border-b border-gray-200 bg-white">
-                <div className="flex items-center gap-3 p-4">
+                <div className="flex items-center gap-3 px-3 py-4">
                     <Link href="/home" className="flex items-center gap-2.5">
                         <div className="bg-primary flex h-10 w-10 items-center justify-center rounded-xl shadow-sm">
                             <Leaf className="text-primary-foreground h-6 w-6" />
@@ -110,7 +110,7 @@ export default function Sidebar({ profileWithTeams, selectTeam }: SidebarProps) 
                     </Link>
                 </div>
 
-                <div className="px-2 pb-4">
+                <div className="px-1 pb-4">
                     {/* チーム選択ドロップダウン */}
                     <SidebarTeamSelectDropdown
                         selectTeam={selectTeam}

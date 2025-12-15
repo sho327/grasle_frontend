@@ -117,7 +117,7 @@ export function ClientMainLayout({
         <>
             <Sidebar profileWithTeams={profileWithTeams} selectTeam={currentTeam} />
             {/* メインコンテンツ(ヘッダー 〜 下部ナビゲーション) */}
-            <SidebarInset className="flex h-screen flex-col overflow-scroll">
+            <SidebarInset className="flex h-screen flex-col overflow-scroll pe-0">
                 {/* ヘッダー */}
                 <Header profileWithTeams={profileWithTeams} project={project} />
 

@@ -39,7 +39,7 @@ export default function HeaderLayout({ profileWithTeams, project }: HeaderProps)
     // テンプレート（コンポーネント描画処理）
     // ============================================================================
     return (
-        <header className="border-border bg-card sticky top-0 flex h-14 items-center gap-4 border-b px-4 shadow-xs md:px-6">
+        <header className="border-border bg-card sticky top-0 flex h-15 items-center gap-4 border-b px-4 shadow-xs md:px-6">
             {/* 左側: ロゴ、チーム選択 */}
             <div className="flex h-13 min-w-0 flex-1 items-center gap-2.5 md:flex-initial">
                 {(!isProjectSelected && isMobile) ||

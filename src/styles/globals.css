@@ -6,6 +6,7 @@
 :root {
     /* Unimoa brand colors - #18BC9C primary, #f4f6f9 background */
     --background: #f4f6f9;
+    /* --background: oklch(100% 0 0); */
     --foreground: #2c3e50;
     --card: #ffffff;
     --card-foreground: #2c3e50;
@@ -17,7 +18,8 @@
     --secondary-foreground: #2c3e50;
     --muted: #bdc3c7;
     --muted-foreground: #7f8c8d;
-    --accent: #3498db;
+    /* --accent: #3498db; */
+    --accent: #18bc9c;
     --accent-foreground: #ffffff;
     --destructive: #e74c3c;
     --destructive-foreground: #ffffff;

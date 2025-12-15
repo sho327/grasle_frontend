@@ -87,7 +87,7 @@ export default function PageHeader({
                         </div>
                     )}
                     <div>
-                        <h1 className="text-foreground text-xl font-semibold sm:text-[1.35rem]">
+                        <h1 className="text-foreground text-xl font-semibold sm:text-[1.425rem]">
                             {pageTitle}
                         </h1>
                         <p className="text-muted-foreground mt-0.75 text-sm">{pageDescription}</p>

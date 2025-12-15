@@ -1,6 +1,7 @@
 'use client'
 // Modules
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useCallback } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import {
     FolderOpen,
@@ -9,7 +10,6 @@ import {
     Users,
     MoreHorizontal,
     ListChecks,
-    CheckCircle,
     Plus,
     Search,
     Filter,
@@ -45,13 +45,13 @@ import {
     SelectValue,
 } from '@/components/ui/select'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
+import { Button } from '@/components/ui/button'
 // Layout/Components
 import PageHeader from '@/components/layout/parts/page-header'
 
-import { Button } from '@/components/ui/button'
-
 interface ProjectListProps {
     projects: ProjectWithDetails[]
+    currentSearchParams: { [key: string]: string | string[] | undefined }
 }
 
 // ----------------------------------------------------
@@ -81,7 +81,10 @@ const calculateProgress = (project: ProjectWithDetails) => {
  * @createdBy KatoShogo
  * @createdAt 2025/11/03
  */
-export default function ProjectList({ projects }: ProjectListProps) {
+export default function ProjectList({ projects, currentSearchParams }: ProjectListProps) {
+    const router = useRouter()
+    const [searchText, setSearchText] = useState(currentSearchParams.search || '')
+
     // ============================================================================
     // 状態管理（State）
     // ============================================================================
@@ -94,6 +97,30 @@ export default function ProjectList({ projects }: ProjectListProps) {
     // ページネーション状態
     const [currentPage, setCurrentPage] = useState(1)
     const itemsPerPage = 1 // 1ページあたりの件数
+
+    // 検索実行ハンドラ
+    const handleSearch = useCallback(() => {
+        const params = new URLSearchParams()
+
+        // 既存のパラメータをコピー
+        Object.keys(currentSearchParams).forEach((key) => {
+            if (currentSearchParams[key] !== undefined && key !== 'search') {
+                params.set(key, currentSearchParams[key] as string)
+            }
+        })
+
+        if (searchText) {
+            params.set('search', searchText)
+        } else {
+            params.delete('search')
+        }
+
+        // URLを更新し、Server Componentを再実行させる
+        router.push(`/project?${params.toString()}`)
+    }, [router, searchText, currentSearchParams])
+
+    // ページネーション、日付フィルタリングなどのハンドラも同様に router.push() で実装します。
+    // 例: handlePageChange(newPage) { ... params.set('offset', newOffset); router.push(...) }
 
     // フィルタークリア関数
     const clearFilters = () => {
@@ -224,7 +251,12 @@ export default function ProjectList({ projects }: ProjectListProps) {
                 pageTitle="プロジェクト一覧"
                 pageDescription="あなたが所属するプロジェクト一覧です。"
                 isBackButton={false}
-            />
+            >
+                <Button className="hidden cursor-pointer rounded-lg shadow-sm sm:flex">
+                    <Plus className="mr-1 h-4 w-4" />
+                    新規登録
+                </Button>
+            </PageHeader>
 
             <div className="mt-7s mb-3 flex items-center justify-between">
                 <div className="flex gap-1.5">
@@ -235,12 +267,17 @@ export default function ProjectList({ projects }: ProjectListProps) {
                             <Input
                                 type="text"
                                 placeholder="プロジェクト名"
-                                value={projectNameFilter}
-                                onChange={(e) => setProjectNameFilter(e.target.value)}
+                                // value={projectNameFilter}
+                                value={searchText}
+                                // onChange={(e) => setProjectNameFilter(e.target.value)}
+                                onChange={(e) => setSearchText(e.target.value)}
                                 className="w-32 rounded-lg bg-white pl-8 text-sm sm:w-48"
                             />
                         </div>
                     </div>
+                    <button onClick={handleSearch} className="bg-primary rounded p-2 text-white">
+                        検索
+                    </button>
                     {/* 最終更新日フィルター */}
                     <div className="space-y-1.5">
                         <Select value={lastUpdatedFilter} onValueChange={setLastUpdatedFilter}>
@@ -256,9 +293,9 @@ export default function ProjectList({ projects }: ProjectListProps) {
                         </Select>
                     </div>
                 </div>
-                <Button className="cursor-pointer rounded-lg shadow-sm">
-                    <Plus className="mr-1 h-4 w-4" />
-                    新規登録
+                <Button className="flex cursor-pointer rounded-lg shadow-sm sm:hidden">
+                    <Plus className="h-4 w-4" />
+                    {/* 新規登録 */}
                 </Button>
             </div>
             {/* ページネーションセクション */}
@@ -370,7 +407,7 @@ export default function ProjectList({ projects }: ProjectListProps) {
                                         {/* お気に入りボタン */}
                                         <button
                                             type="button"
-                                            className={`-mt-1 p-1 transition-colors ${
+                                            className={`-mt-1 cursor-pointer p-1 transition-colors ${
                                                 project.isFavorite
                                                     ? 'text-amber-500 hover:text-amber-600'
                                                     : 'text-slate-400 hover:text-amber-500'
@@ -385,8 +422,8 @@ export default function ProjectList({ projects }: ProjectListProps) {
                                         {/* ドロップダウン */}
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
-                                                <button className="btn btn-link text-muted -mt-2 p-1">
-                                                    <MoreHorizontal className="h-4 w-4 text-slate-400 hover:text-slate-600" />
+                                                <button className="btn btn-link text-muted -mt-2 cursor-pointer p-1 text-slate-400 hover:text-slate-600">
+                                                    <MoreHorizontal className="h-4 w-4" />
                                                 </button>
                                             </DropdownMenuTrigger>
                                             {/* ... DropdownMenuContent は省略 ... */}
@@ -402,12 +439,12 @@ export default function ProjectList({ projects }: ProjectListProps) {
                                 >
                                     <div className="mr-3.5 flex-shrink-0">
                                         {/* アイコン/ロゴの代替 */}
-                                        <div className="bg-primary/10 flex h-12 w-12 items-center justify-center rounded p-1">
-                                            <FolderOpen className="text-primary h-6 w-6" />
+                                        <div className="bg-primary/10 flex h-12.25 w-12.25 items-center justify-center rounded p-1">
+                                            <FolderOpen className="text-primary h-6.25 w-6.25" />
                                         </div>
                                     </div>
                                     <div className="min-w-0 flex-grow">
-                                        <CardTitle className="hover:text-primary mb-0.5 line-clamp-2 text-[1.065rem] font-semibold text-slate-900 transition-colors">
+                                        <CardTitle className="hover:text-primary mb-0.5 line-clamp-2 text-[1.0725rem] font-semibold text-slate-900 transition-colors">
                                             {project.name}
                                         </CardTitle>
                                         <CardDescription className="line-clamp-2 text-[.875rem] text-slate-500">
@@ -419,9 +456,10 @@ export default function ProjectList({ projects }: ProjectListProps) {
                                 {/* 3. 進捗状況 (Progress) */}
                                 <div className="mt-auto pt-1.75">
                                     <div className="mb-1.5 flex items-center justify-start text-xs">
-                                        <div className="text-slate-600">進捗率</div>
+                                        <div className="text-slate-600">進捗率(25%)</div>
                                     </div>
-                                    <Progress value={progressValue} className="h-1.5 bg-gray-200">
+                                    {/* <Progress value={progressValue} className="h-1.5 bg-gray-200"> */}
+                                    <Progress value={25} className="h-1.5 bg-gray-200">
                                         {/* Progressコンポーネントが背景とバーを制御 */}
                                     </Progress>
                                 </div>
@@ -431,7 +469,8 @@ export default function ProjectList({ projects }: ProjectListProps) {
                                     <div className="flex items-center gap-2 text-slate-600">
                                         <ListChecks className="text-muted h-4 w-4" />
                                         <span>
-                                            {completedTasks}/{totalTasks}タスク
+                                            {/* {completedTasks}/{totalTasks}タスク */}
+                                            {1}/{4}タスク完了
                                         </span>
                                     </div>
                                     <div className="flex items-center gap-2 text-slate-600">
